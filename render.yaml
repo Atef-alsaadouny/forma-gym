@@ -2,7 +2,7 @@ services:
   - type: web
     name: forma-gym
     env: docker
-    dockerfilePath: ./docker/Dockerfile
+    dockerfilePath: ./Dockerfile
     envVars:
       - key: APP_ENV
         value: production
