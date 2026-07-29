@@ -90,7 +90,7 @@
                                 <input type="text" id="name" name="name" value="{{ old('name') }}" required
                                     class="input-field w-full rounded-xl border border-white/5 bg-white/5 px-3 py-2.5 text-white placeholder-white/50 backdrop-blur-sm transition-all duration-200 focus:border-gym-primary focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-gym-primary/40"
                                     placeholder="{{ __('messages.register_full_name') }}"
-                                    oninvalid="this.setCustomValidity('{{ app()->getLocale() === 'ar' ? 'هذا الحقل مطلوب' : 'This field is required' }}')"
+                                    oninvalid="this.setCustomValidity(document.documentElement.dir === 'rtl' ? 'هذا الحقل مطلوب' : 'This field is required')"
                                     oninput="this.setCustomValidity('')">
                                 @error('name')
                                     <p class="error-message mt-1 text-sm text-red-400">{{ $message }}</p>
@@ -101,7 +101,7 @@
                                 <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" required dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}"
                                     class="input-field w-full rounded-xl border border-white/5 bg-white/5 px-3 py-2.5 {{ app()->getLocale() === 'ar' ? 'text-right' : 'text-left' }} text-white placeholder-white/50 backdrop-blur-sm transition-all duration-200 focus:border-gym-primary focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-gym-primary/40"
                                     placeholder="{{ __('messages.register_phone') }}"
-                                    oninvalid="this.setCustomValidity('{{ app()->getLocale() === 'ar' ? 'هذا الحقل مطلوب' : 'This field is required' }}')"
+                                    oninvalid="this.setCustomValidity(document.documentElement.dir === 'rtl' ? 'هذا الحقل مطلوب' : 'This field is required')"
                                     oninput="normalizePhone(this); this.setCustomValidity('')">
                                 @error('phone')
                                     <p class="error-message mt-1 text-sm text-red-400">{{ $message }}</p>
