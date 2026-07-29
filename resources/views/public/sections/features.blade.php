@@ -71,12 +71,8 @@
             const skeleton = document.getElementById('features-skeleton');
             const content = document.getElementById('features-content');
             if (skeleton && content) {
-                content.style.display = 'none';
-                skeleton.classList.remove('hidden');
-                setTimeout(function() {
-                    skeleton.classList.add('hidden');
-                    content.style.display = 'grid';
-                }, 350);
+                skeleton.classList.add('hidden');
+                content.style.display = 'grid';
             }
         })();
     </script>

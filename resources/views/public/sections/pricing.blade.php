@@ -81,12 +81,8 @@
             const skeleton = document.getElementById('pricing-skeleton');
             const content = document.getElementById('pricing-content');
             if (skeleton && content) {
-                content.style.display = 'none';
-                skeleton.classList.remove('hidden');
-                setTimeout(function() {
-                    skeleton.classList.add('hidden');
-                    content.style.display = 'grid';
-                }, 550);
+                skeleton.classList.add('hidden');
+                content.style.display = 'grid';
             }
         })();
     </script>

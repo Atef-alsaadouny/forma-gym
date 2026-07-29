@@ -1,7 +1,6 @@
 <section id="hero" class="hero-section flex min-h-screen items-center justify-center overflow-hidden">
     <div class="hidden md:block absolute inset-0 overflow-hidden pointer-events-none">
         <video autoplay muted loop playsinline preload="metadata"
-            poster="{{ asset('images/gym-bg.jpg') }}"
             class="h-full w-full object-cover">
             <source src="{{ asset('video/gym-1.mp4') }}" type="video/mp4">
         </video>

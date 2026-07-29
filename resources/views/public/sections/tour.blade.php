@@ -1,62 +1,62 @@
 @php
     $gallery = [
         [
-            'src' => 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80',
-            'thumb' => 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=60',
+            'src' => 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80',
+            'thumb' => 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&q=40',
             'title' => __('messages.tour_gallery_1_title'),
             'desc' => __('messages.tour_gallery_1_desc'),
         ],
         [
-            'src' => 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&q=80',
-            'thumb' => 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&q=60',
+            'src' => 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80',
+            'thumb' => 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&q=40',
             'title' => __('messages.tour_gallery_2_title'),
             'desc' => __('messages.tour_gallery_2_desc'),
         ],
         [
-            'src' => 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=1200&q=80',
-            'thumb' => 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=400&q=60',
+            'src' => 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&q=80',
+            'thumb' => 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&q=40',
             'title' => __('messages.tour_gallery_3_title'),
             'desc' => __('messages.tour_gallery_3_desc'),
         ],
         [
-            'src' => 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1200&q=80',
-            'thumb' => 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&q=60',
+            'src' => 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&q=80',
+            'thumb' => 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=200&q=40',
             'title' => __('messages.tour_gallery_4_title'),
             'desc' => __('messages.tour_gallery_4_desc'),
         ],
         [
-            'src' => 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=1200&q=80',
-            'thumb' => 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=400&q=60',
+            'src' => 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&q=80',
+            'thumb' => 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=200&q=40',
             'title' => __('messages.tour_gallery_5_title'),
             'desc' => __('messages.tour_gallery_5_desc'),
         ],
         [
-            'src' => 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1200&q=80',
-            'thumb' => 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=400&q=60',
+            'src' => 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&q=80',
+            'thumb' => 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=200&q=40',
             'title' => __('messages.tour_gallery_6_title'),
             'desc' => __('messages.tour_gallery_6_desc'),
         ],
         [
-            'src' => 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80',
-            'thumb' => 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=60',
+            'src' => 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80',
+            'thumb' => 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=200&q=40',
             'title' => __('messages.tour_gallery_7_title'),
             'desc' => __('messages.tour_gallery_7_desc'),
         ],
         [
-            'src' => 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&q=80',
-            'thumb' => 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&q=60',
+            'src' => 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=80',
+            'thumb' => 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=200&q=40',
             'title' => __('messages.tour_gallery_8_title'),
             'desc' => __('messages.tour_gallery_8_desc'),
         ],
         [
-            'src' => 'https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=1200&q=80',
-            'thumb' => 'https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=400&q=60',
+            'src' => 'https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=800&q=80',
+            'thumb' => 'https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=200&q=40',
             'title' => __('messages.tour_gallery_9_title'),
             'desc' => __('messages.tour_gallery_9_desc'),
         ],
         [
-            'src' => 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1200&q=80',
-            'thumb' => 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=400&q=60',
+            'src' => 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=800&q=80',
+            'thumb' => 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=200&q=40',
             'title' => __('messages.tour_gallery_10_title'),
             'desc' => __('messages.tour_gallery_10_desc'),
         ],
@@ -87,6 +87,7 @@
                         src="{{ $gallery[0]['src'] }}"
                         alt="{{ $gallery[0]['title'] }}"
                         class="h-full w-full cursor-pointer object-cover transition-opacity duration-500"
+                        fetchpriority="high"
                         onclick="openLightbox(currentIndex)">
                     <div class="absolute inset-0 bg-gradient-to-t from-gym-dark/90 via-transparent to-transparent pointer-events-none"></div>
                     <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6 pointer-events-none">
@@ -161,12 +162,8 @@
             const skeleton = document.getElementById('tour-skeleton');
             const content = document.getElementById('tour-content');
             if (skeleton && content) {
-                content.style.display = 'none';
-                skeleton.classList.remove('hidden');
-                setTimeout(function() {
-                    skeleton.classList.add('hidden');
-                    content.style.display = 'block';
-                }, 450);
+                skeleton.classList.add('hidden');
+                content.style.display = 'block';
             }
         })();
 
