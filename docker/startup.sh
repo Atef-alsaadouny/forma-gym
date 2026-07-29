@@ -2,6 +2,10 @@
 
 set -e
 
+php artisan package:discover --ansi
+
+php artisan storage:link
+
 if [ -z "${APP_KEY:-}" ]; then
     if [ ! -f .env ]; then
         cp .env.example .env

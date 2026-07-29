@@ -25,9 +25,9 @@ COPY . .
 
 RUN npm ci --no-audit --no-fund && npm run build
 
-RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+ENV COMPOSER_MEMORY_LIMIT=-1
 
-RUN php artisan storage:link
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts
 
 COPY docker/nginx/render.conf /etc/nginx/sites-enabled/default
 
