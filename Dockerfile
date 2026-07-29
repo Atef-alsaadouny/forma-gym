@@ -27,17 +27,15 @@ RUN npm ci --no-audit --no-fund && npm run build
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
-RUN php artisan storage:link && \
-    php artisan config:cache && \
-    php artisan route:cache && \
-    php artisan view:cache
-
-RUN chown -R www-data:www-data storage bootstrap/cache public/storage
+RUN php artisan storage:link
 
 COPY docker/nginx/render.conf /etc/nginx/sites-enabled/default
 
 COPY docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+COPY docker/startup.sh /usr/local/bin/startup.sh
+RUN chmod +x /usr/local/bin/startup.sh
+
 EXPOSE 10000
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/usr/local/bin/startup.sh"]
