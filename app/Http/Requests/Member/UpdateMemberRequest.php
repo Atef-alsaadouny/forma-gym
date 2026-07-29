@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Member;
 
-use App\Enums\MemberRole;
-use App\Models\Member;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

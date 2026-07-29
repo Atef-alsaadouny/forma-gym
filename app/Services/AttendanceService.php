@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\AttendanceRecord;
-use App\Models\Gym;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -90,31 +89,23 @@ class AttendanceService extends BaseService
         ]);
     }
 
-    private function getDefaultGymId(): int
-    {
-        return Gym::firstOrCreate(
-            ['slug' => 'default'],
-            ['name' => 'Default Gym', 'is_active' => true],
-        )->id;
-    }
-
     private function applyFilters(Builder $query, array $filters): Builder
     {
-        if (!empty($filters['search'])) {
+        if (! empty($filters['search'])) {
             $query->whereHas('member.user', function (Builder $q) use ($filters): void {
                 $q->whereAny(['name', 'email'], 'like', "%{$filters['search']}%");
             });
         }
 
-        if (!empty($filters['date_from'])) {
+        if (! empty($filters['date_from'])) {
             $query->whereDate('date', '>=', $filters['date_from']);
         }
 
-        if (!empty($filters['date_to'])) {
+        if (! empty($filters['date_to'])) {
             $query->whereDate('date', '<=', $filters['date_to']);
         }
 
-        if (!empty($filters['member_id'])) {
+        if (! empty($filters['member_id'])) {
             $query->where('member_id', $filters['member_id']);
         }
 

@@ -21,7 +21,7 @@ class AttendanceRecordFactory extends Factory
     {
         $date = fake()->dateTimeBetween('-1 month');
         $checkedIn = clone $date;
-        $checkedIn->modify('+' . fake()->numberBetween(6, 10) . ' hours');
+        $checkedIn->modify('+'.fake()->numberBetween(6, 10).' hours');
 
         return [
             'member_id' => Member::factory(),

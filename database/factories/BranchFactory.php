@@ -20,8 +20,8 @@ class BranchFactory extends Factory
     {
         return [
             'gym_id' => Gym::factory(),
-            'name' => fake()->city() . ' Branch',
-            'slug' => Str::slug(fake()->city() . '-branch'),
+            'name' => fake()->city().' Branch',
+            'slug' => Str::slug(fake()->city().'-branch'),
             'email' => fake()->companyEmail(),
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),

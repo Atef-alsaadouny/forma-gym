@@ -41,7 +41,7 @@ class MemberController extends Controller
         $member = $this->memberService->create($request->validated());
 
         return to_route('admin.members.show', $member)
-            ->with('success', 'Member created successfully.');
+            ->with('success', __('Member created successfully.'));
     }
 
     public function show(Member $member): View
@@ -67,7 +67,7 @@ class MemberController extends Controller
         $member = $this->memberService->update($member, $request->validated());
 
         return to_route('admin.members.show', $member)
-            ->with('success', 'Member updated successfully.');
+            ->with('success', __('Member updated successfully.'));
     }
 
     public function destroy(Member $member): RedirectResponse
@@ -77,6 +77,6 @@ class MemberController extends Controller
         $this->memberService->delete($member);
 
         return to_route('admin.members.index')
-            ->with('success', 'Member deleted successfully.');
+            ->with('success', __('Member deleted successfully.'));
     }
 }

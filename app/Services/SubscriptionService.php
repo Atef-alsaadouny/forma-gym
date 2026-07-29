@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Enums\SubscriptionStatus;
-use App\Models\Gym;
 use App\Models\Subscription;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -92,34 +91,26 @@ class SubscriptionService extends BaseService
         return $subscription->fresh()->load(['member.user', 'package']);
     }
 
-    private function getDefaultGymId(): int
-    {
-        return Gym::firstOrCreate(
-            ['slug' => 'default'],
-            ['name' => 'Default Gym', 'is_active' => true],
-        )->id;
-    }
-
     private function applyFilters(Builder $query, array $filters): Builder
     {
-        if (!empty($filters['search'])) {
+        if (! empty($filters['search'])) {
             $query->whereHas('member.user', function (Builder $q) use ($filters): void {
                 $q->whereAny(['name', 'email'], 'like', "%{$filters['search']}%");
             });
         }
 
-        if (!empty($filters['status'])) {
+        if (! empty($filters['status'])) {
             $status = SubscriptionStatus::tryFrom($filters['status']);
             if ($status) {
                 $query->byStatus($status);
             }
         }
 
-        if (!empty($filters['package_id'])) {
+        if (! empty($filters['package_id'])) {
             $query->where('package_id', $filters['package_id']);
         }
 
-        if (!empty($filters['source'])) {
+        if (! empty($filters['source'])) {
             $query->where('source', $filters['source']);
         }
 

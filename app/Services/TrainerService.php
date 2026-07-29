@@ -6,7 +6,6 @@ namespace App\Services;
 
 use App\Enums\MemberRole;
 use App\Enums\TrainerStatus;
-use App\Models\Gym;
 use App\Models\Trainer;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -29,7 +28,7 @@ class TrainerService extends BaseService
     public function create(array $data): Trainer
     {
         $user = User::create([
-            'name' => $data['first_name'] . ' ' . $data['last_name'],
+            'name' => $data['first_name'].' '.$data['last_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password'] ?? 'password'),
             'phone' => $data['phone'] ?? null,
@@ -92,7 +91,7 @@ class TrainerService extends BaseService
         if (isset($data['first_name']) || isset($data['last_name']) || isset($data['email']) || isset($data['phone'])) {
             $userData = [];
             if (isset($data['first_name'], $data['last_name'])) {
-                $userData['name'] = $data['first_name'] . ' ' . $data['last_name'];
+                $userData['name'] = $data['first_name'].' '.$data['last_name'];
             }
             if (isset($data['email'])) {
                 $userData['email'] = $data['email'];
@@ -162,36 +161,28 @@ class TrainerService extends BaseService
         return $photo->store('trainer-photos', 'public');
     }
 
-    private function getDefaultGymId(): int
-    {
-        return Gym::firstOrCreate(
-            ['slug' => 'default'],
-            ['name' => 'Default Gym', 'is_active' => true],
-        )->id;
-    }
-
     private function applyFilters(Builder $query, array $filters): Builder
     {
-        if (!empty($filters['search'])) {
+        if (! empty($filters['search'])) {
             $query->search($filters['search']);
         }
 
-        if (!empty($filters['status'])) {
+        if (! empty($filters['status'])) {
             $status = TrainerStatus::tryFrom($filters['status']);
             if ($status) {
                 $query->byStatus($status);
             }
         }
 
-        if (!empty($filters['specialization'])) {
+        if (! empty($filters['specialization'])) {
             $query->bySpecialization($filters['specialization']);
         }
 
-        if (!empty($filters['is_available'])) {
+        if (! empty($filters['is_available'])) {
             $query->available();
         }
 
-        if (!empty($filters['gender'])) {
+        if (! empty($filters['gender'])) {
             $query->where('gender', $filters['gender']);
         }
 

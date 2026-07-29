@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Enums\MemberRole;
+use App\Enums\MemberStatus;
+use App\Enums\SubscriptionStatus;
 use App\Models\Gym;
 use App\Models\Member;
 use App\Models\Package;
 use App\Models\Subscription;
 use App\Models\User;
-use App\Enums\MemberRole;
-use App\Enums\MemberStatus;
-use App\Enums\SubscriptionStatus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -25,7 +25,7 @@ class PublicBookingFlowTest extends TestCase
 
         $user = User::create([
             'name' => $overrides['name'] ?? 'Test User',
-            'email' => 'test_' . time() . '@gym.com',
+            'email' => 'test_'.time().'@gym.com',
             'password' => bcrypt('password'),
             'phone' => $overrides['phone'] ?? '55123456',
             'role' => MemberRole::Member,
@@ -280,7 +280,7 @@ class PublicBookingFlowTest extends TestCase
     public function test_lookup_with_valid_reference_succeeds(): void
     {
         $subscription = $this->createSubscription(['phone' => '55123456']);
-        $ref = 'FOG' . str_pad((string) $subscription->id, 5, '0', STR_PAD_LEFT);
+        $ref = 'FOG'.str_pad((string) $subscription->id, 5, '0', STR_PAD_LEFT);
 
         $response = $this->post(route('subscription.lookup.store'), [
             'booking_ref' => $ref,
@@ -305,7 +305,7 @@ class PublicBookingFlowTest extends TestCase
     public function test_lookup_with_wrong_phone_fails(): void
     {
         $subscription = $this->createSubscription(['phone' => '55123456']);
-        $ref = 'FOG' . str_pad((string) $subscription->id, 5, '0', STR_PAD_LEFT);
+        $ref = 'FOG'.str_pad((string) $subscription->id, 5, '0', STR_PAD_LEFT);
 
         $response = $this->post(route('subscription.lookup.store'), [
             'booking_ref' => $ref,

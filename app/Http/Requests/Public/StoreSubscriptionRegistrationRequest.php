@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests\Public;
 
 use App\Enums\SubscriptionStatus;
+use App\Helpers\PhoneHelper;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Contracts\Validation\Validator;
@@ -23,7 +24,7 @@ class StoreSubscriptionRegistrationRequest extends FormRequest
         $phone = $this->input('phone');
 
         if ($phone) {
-            $phone = $this->normalizeArabicNumerals($phone);
+            $phone = PhoneHelper::normalizeArabicNumerals($phone);
             $this->merge(['phone' => $phone]);
         }
     }
@@ -59,30 +60,10 @@ class StoreSubscriptionRegistrationRequest extends FormRequest
         ];
     }
 
-    public function messages(): array
-    {
-        return [
-            'name.required' => 'الاسم مطلوب',
-            'name.min' => 'الاسم يجب أن يكون على الأقل حرفين',
-            'phone.required' => 'رقم الهاتف مطلوب',
-            'phone.regex' => 'رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 4 أو 5 أو 6 أو 9',
-            'trainer_id.exists' => 'المدرب المحدد غير موجود',
-            'phone.active_subscription' => 'This phone number already has an active subscription.',
-        ];
-    }
-
     protected function failedValidation(Validator $validator): void
     {
         throw (new ValidationException($validator))
             ->errorBag('default')
             ->redirectTo($this->getRedirectUrl());
-    }
-
-    private function normalizeArabicNumerals(string $input): string
-    {
-        $arabic = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-        $english = range(0, 9);
-
-        return str_replace($arabic, $english, $input);
     }
 }

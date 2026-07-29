@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Enums\MemberRole;
 use App\Enums\MemberStatus;
-use App\Models\Gym;
 use App\Models\Member;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -26,11 +26,11 @@ class MemberService extends BaseService
     public function create(array $data): Member
     {
         $user = User::create([
-            'name' => $data['first_name'] . ' ' . $data['last_name'],
+            'name' => $data['first_name'].' '.$data['last_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password'] ?? 'password'),
             'phone' => $data['phone'] ?? null,
-            'role' => \App\Enums\MemberRole::Member,
+            'role' => MemberRole::Member,
             'is_active' => true,
         ]);
 
@@ -68,7 +68,7 @@ class MemberService extends BaseService
         if (isset($data['first_name']) || isset($data['last_name']) || isset($data['email']) || isset($data['phone'])) {
             $userData = [];
             if (isset($data['first_name'], $data['last_name'])) {
-                $userData['name'] = $data['first_name'] . ' ' . $data['last_name'];
+                $userData['name'] = $data['first_name'].' '.$data['last_name'];
             }
             if (isset($data['email'])) {
                 $userData['email'] = $data['email'];
@@ -124,32 +124,24 @@ class MemberService extends BaseService
         return $member->load('user');
     }
 
-    private function getDefaultGymId(): int
-    {
-        return Gym::firstOrCreate(
-            ['slug' => 'default'],
-            ['name' => 'Default Gym', 'is_active' => true],
-        )->id;
-    }
-
     private function applyFilters(Builder $query, array $filters): Builder
     {
-        if (!empty($filters['search'])) {
+        if (! empty($filters['search'])) {
             $query->search($filters['search']);
         }
 
-        if (!empty($filters['status'])) {
+        if (! empty($filters['status'])) {
             $status = MemberStatus::tryFrom($filters['status']);
             if ($status) {
                 $query->byStatus($status);
             }
         }
 
-        if (!empty($filters['date_from']) && !empty($filters['date_to'])) {
+        if (! empty($filters['date_from']) && ! empty($filters['date_to'])) {
             $query->joinedBetween($filters['date_from'], $filters['date_to']);
         }
 
-        if (!empty($filters['gender'])) {
+        if (! empty($filters['gender'])) {
             $query->where('gender', $filters['gender']);
         }
 

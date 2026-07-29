@@ -37,7 +37,7 @@ class SubscriptionRegisterController extends Controller
         $price = $request->query('price') ? (float) $request->query('price') : null;
         $duration = $request->query('duration') ? (int) $request->query('duration') : null;
 
-        if (!$plan || !$price || !$duration) {
+        if (! $plan || ! $price || ! $duration) {
             $plan = null;
             $price = null;
             $duration = null;

@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace App\Traits;
 
+use App\Models\Branch;
+use App\Models\Gym;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait HasGymAndBranch
 {
     public function gym(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\Gym::class);
+        return $this->belongsTo(Gym::class);
     }
 
     public function branch(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\Branch::class);
+        return $this->belongsTo(Branch::class);
     }
 
     public function scopeByGym($query, int $gymId): void

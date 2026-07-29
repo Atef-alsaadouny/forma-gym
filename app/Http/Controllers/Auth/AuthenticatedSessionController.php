@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\MemberRole;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
@@ -26,7 +27,7 @@ class AuthenticatedSessionController extends Controller
 
         $user = Auth::user();
 
-        if ($user->isAdmin() || $user->isTrainer() || $user->hasRole(\App\Enums\MemberRole::Manager) || $user->hasRole(\App\Enums\MemberRole::Receptionist)) {
+        if ($user->isAdmin() || $user->isTrainer() || $user->hasRole(MemberRole::Manager) || $user->hasRole(MemberRole::Receptionist)) {
             return redirect()->intended(route('admin.subscriptions.index'));
         }
 

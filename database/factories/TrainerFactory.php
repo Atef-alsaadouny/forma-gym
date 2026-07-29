@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enums\MemberRole;
 use App\Enums\TrainerStatus;
 use App\Models\Branch;
 use App\Models\Gym;
 use App\Models\Trainer;
 use App\Models\User;
-use App\Enums\MemberRole;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

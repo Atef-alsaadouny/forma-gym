@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Enums\MemberRole;
-use App\Enums\SubscriptionStatus;
+use App\Models\Branch;
+use App\Models\Gym;
 use App\Models\Member;
 use App\Models\Package;
 use App\Models\Subscription;
@@ -18,7 +19,9 @@ class SubscriptionManagementTest extends TestCase
     use RefreshDatabase;
 
     private User $admin;
+
     private User $manager;
+
     private User $member;
 
     protected function setUp(): void
@@ -55,8 +58,8 @@ class SubscriptionManagementTest extends TestCase
     {
         $this->actingAs($this->admin);
 
-        $gym = \App\Models\Gym::factory()->create();
-        $branch = \App\Models\Branch::factory()->create(['gym_id' => $gym->id]);
+        $gym = Gym::factory()->create();
+        $branch = Branch::factory()->create(['gym_id' => $gym->id]);
         Subscription::factory()->count(3)->create([
             'gym_id' => $gym->id,
             'branch_id' => $branch->id,

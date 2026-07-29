@@ -41,7 +41,7 @@ class TrainerController extends Controller
         $trainer = $this->trainerService->create($request->validated());
 
         return to_route('admin.trainers.show', $trainer)
-            ->with('success', 'Trainer created successfully.');
+            ->with('success', __('Trainer created successfully.'));
     }
 
     public function show(Trainer $trainer): View
@@ -67,7 +67,7 @@ class TrainerController extends Controller
         $trainer = $this->trainerService->update($trainer, $request->validated());
 
         return to_route('admin.trainers.show', $trainer)
-            ->with('success', 'Trainer updated successfully.');
+            ->with('success', __('Trainer updated successfully.'));
     }
 
     public function destroy(Trainer $trainer): RedirectResponse
@@ -77,6 +77,6 @@ class TrainerController extends Controller
         $this->trainerService->delete($trainer);
 
         return to_route('admin.trainers.index')
-            ->with('success', 'Trainer deleted successfully.');
+            ->with('success', __('Trainer deleted successfully.'));
     }
 }

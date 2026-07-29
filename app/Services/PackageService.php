@@ -66,17 +66,9 @@ class PackageService extends BaseService
         $this->logInfo('Package deleted', ['package_id' => $package->id]);
     }
 
-    private function getDefaultGymId(): int
-    {
-        return \App\Models\Gym::firstOrCreate(
-            ['slug' => 'default'],
-            ['name' => 'Default Gym', 'is_active' => true],
-        )->id;
-    }
-
     private function applyFilters(Builder $query, array $filters): Builder
     {
-        if (!empty($filters['search'])) {
+        if (! empty($filters['search'])) {
             $query->search($filters['search']);
         }
 

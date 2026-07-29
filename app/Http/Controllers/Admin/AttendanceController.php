@@ -11,7 +11,6 @@ use App\Models\AttendanceRecord;
 use App\Models\Member;
 use App\Services\AttendanceService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class AttendanceController extends Controller

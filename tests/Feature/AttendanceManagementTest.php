@@ -16,7 +16,9 @@ class AttendanceManagementTest extends TestCase
     use RefreshDatabase;
 
     private User $admin;
+
     private User $manager;
+
     private User $member;
 
     protected function setUp(): void

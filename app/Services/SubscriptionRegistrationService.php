@@ -7,7 +7,6 @@ namespace App\Services;
 use App\Enums\MemberRole;
 use App\Enums\MemberStatus;
 use App\Enums\SubscriptionStatus;
-use App\Models\Gym;
 use App\Models\Member;
 use App\Models\Package;
 use App\Models\Subscription;
@@ -15,7 +14,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class SubscriptionRegistrationService
+class SubscriptionRegistrationService extends BaseService
 {
     public function register(array $data, string $planName, float $price, int $durationDays): array
     {
@@ -36,13 +35,13 @@ class SubscriptionRegistrationService
             $trainerNames = [1 => 'أحمد محمد', 2 => 'سارة علي', 3 => 'محمد حسن', 4 => 'ليلى خالد'];
             $trainerPrice = 0;
             $trainerName = null;
-            $trainerId = !empty($data['trainer_id']) ? (int) $data['trainer_id'] : 0;
+            $trainerId = ! empty($data['trainer_id']) ? (int) $data['trainer_id'] : 0;
             if ($trainerId && isset($trainerNames[$trainerId])) {
                 $trainerPrice = 20;
                 $trainerName = $trainerNames[$trainerId];
             }
 
-            $lockerPrice = !empty($data['locker']) ? 5 : 0;
+            $lockerPrice = ! empty($data['locker']) ? 5 : 0;
 
             $totalPrice = $price + $trainerPrice + $lockerPrice;
 
@@ -67,14 +66,14 @@ class SubscriptionRegistrationService
                     'duration_days' => $durationDays,
                     'base_price' => $price,
                 ],
-                'addons' => !empty($addons) ? $addons : null,
+                'addons' => ! empty($addons) ? $addons : null,
                 'notes' => 'تسجيل عبر الموقع',
                 'source' => 'public',
             ]);
 
-            $bookingRef = 'FOG' . str_pad((string) $subscription->id, 5, '0', STR_PAD_LEFT);
+            $bookingRef = 'FOG'.str_pad((string) $subscription->id, 5, '0', STR_PAD_LEFT);
 
-            $user->update(['email' => $bookingRef . '@gym.com']);
+            $user->update(['email' => $bookingRef.'@gym.com']);
 
             return [
                 'booking_ref' => $bookingRef,
@@ -99,7 +98,7 @@ class SubscriptionRegistrationService
     {
         return User::create([
             'name' => $name,
-            'email' => 'tmp_' . Str::random(16) . '@gym.com',
+            'email' => 'tmp_'.Str::random(16).'@gym.com',
             'password' => bcrypt('password'),
             'phone' => $phone,
             'role' => MemberRole::Member,
@@ -124,7 +123,7 @@ class SubscriptionRegistrationService
             ->where('duration_days', $durationDays)
             ->first();
 
-        if (!$package) {
+        if (! $package) {
             $package = Package::create([
                 'gym_id' => $gymId,
                 'name' => $name,
@@ -137,19 +136,11 @@ class SubscriptionRegistrationService
         return $package;
     }
 
-    private function getDefaultGymId(): int
-    {
-        return Gym::firstOrCreate(
-            ['slug' => 'default'],
-            ['name' => 'Default Gym', 'is_active' => true],
-        )->id;
-    }
-
     private function assertNoActiveSubscription(string $phone): void
     {
         $user = User::where('phone', $phone)->first();
 
-        if (!$user || !$user->member) {
+        if (! $user || ! $user->member) {
             return;
         }
 

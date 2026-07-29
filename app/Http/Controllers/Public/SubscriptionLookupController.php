@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Public;
 
+use App\Helpers\PhoneHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class SubscriptionLookupController extends Controller
         $ref = strtoupper(trim($validated['booking_ref']));
         $phone = $this->normalizePhone(trim($validated['phone']));
 
-        if (!str_starts_with($ref, 'FOG')) {
+        if (! str_starts_with($ref, 'FOG')) {
             return view('public.subscription-lookup', [
                 'error' => 'صيغة رقم الحجز غير صحيحة',
             ]);
@@ -41,7 +42,7 @@ class SubscriptionLookupController extends Controller
 
         $subscription = Subscription::with('member.user', 'package')->find($id);
 
-        if (!$subscription || $subscription->member->user->phone !== $phone) {
+        if (! $subscription || $subscription->member->user->phone !== $phone) {
             return view('public.subscription-lookup', [
                 'error' => 'لم يتم العثور على اشتراك بهذه البيانات. تأكد من رقم الحجز ورقم الهاتف.',
             ]);
@@ -97,8 +98,6 @@ class SubscriptionLookupController extends Controller
 
     private function normalizePhone(string $phone): string
     {
-        $arabic = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-        $english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-        return str_replace($arabic, $english, $phone);
+        return PhoneHelper::normalizeArabicNumerals($phone);
     }
 }
