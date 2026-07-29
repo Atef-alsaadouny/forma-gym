@@ -81,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
             spaceBetween: 24,
             centeredSlides: true,
             watchOverflow: true,
-            loop: true,
             autoplay: {
                 delay: 4000,
                 disableOnInteraction: false,
