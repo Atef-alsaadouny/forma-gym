@@ -51,21 +51,22 @@
     <meta name="google-site-verification" content="0-QMSFSzi465e38eI1zu8LUExkqJrEZRUeij436oydI" />
 
     {{-- SEO — JSON-LD --}}
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "HealthClub",
-        "name": "{{ config('app.name', 'Forma Gym') }}",
-        "url": "{{ url('/') }}",
-        "logo": "{{ asset('favicon.svg') }}",
-        "image": "{{ asset('images/gym-reg.jpg') }}",
-        "description": "{{ __('messages.site_description') }}",
-        "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "KW"
-        }
-    }
-    </script>
+    @php
+        $ldJson = json_encode([
+            '@context' => 'https://schema.org',
+            '@type' => 'HealthClub',
+            'name' => config('app.name', 'Forma Gym'),
+            'url' => url('/'),
+            'logo' => asset('favicon.svg'),
+            'image' => asset('images/gym-reg.jpg'),
+            'description' => __('messages.site_description'),
+            'address' => [
+                '@type' => 'PostalAddress',
+                'addressCountry' => 'KW',
+            ],
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+    @endphp
+    <script type="application/ld+json">{!! $ldJson !!}</script>
     @stack('jsonld')
 </head>
 <body class="h-full font-sans antialiased text-gym-text bg-gym-light overflow-x-hidden">
