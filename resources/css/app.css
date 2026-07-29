@@ -1,0 +1,394 @@
+@import "tailwindcss";
+@source "../views";
+
+@theme {
+    --color-gym-primary: #8BC53F;
+    --color-gym-primary-hover: #78AE34;
+    --color-gym-primary-light: #A7D85B;
+
+    --color-gym-dark: #0B1115;
+    --color-gym-card: #141C22;
+    --color-gym-dark-hover: #1B2730;
+
+    --color-gym-light: #F8FAFC;
+    --color-gym-surface: #E2E8F0;
+    --color-gym-white: #FFFFFF;
+
+    --color-gym-text: #111827;
+    --color-gym-muted: #6B7280;
+
+    --color-gym-border: #E5E7EB;
+    --color-gym-divider: #D1D5DB;
+
+    --color-gym-success: #22C55E;
+    --color-gym-success-bg: #DCFCE7;
+    --color-gym-success-text: #15803D;
+
+    --color-gym-warning: #F59E0B;
+    --color-gym-warning-bg: #FEF3C7;
+    --color-gym-warning-text: #B45309;
+
+    --color-gym-danger: #EF4444;
+    --color-gym-danger-bg: #FEE2E2;
+    --color-gym-danger-text: #B91C1C;
+
+    --color-gym-info: #64748B;
+    --color-gym-info-bg: #F1F5F9;
+    --color-gym-info-text: #475569;
+
+    --color-gym-inactive-bg: #F3F4F6;
+
+    --color-gym-star: #F59E0B;
+    --color-gym-schedule-blue: #3B82F6;
+    --color-gym-schedule-purple: #8B5CF6;
+    --color-gym-schedule-yellow: #F59E0B;
+    --color-gym-schedule-green: #8BC53F;
+
+    --color-cf-spin: #3B82F6;
+    --color-cf-hiit: #EF4444;
+    --color-cf-fitness: #22C55E;
+    --color-cf-lower: #8B5CF6;
+    --color-cf-steps: #F59E0B;
+    --color-cf-back: #14B8A6;
+    --color-cf-abs: #EC4899;
+
+    --font-sans: 'Cairo', 'Noto Kufi Arabic', system-ui, -apple-system, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#navbar {
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+}
+#navbar.navbar-solid {
+    background-color: rgba(11, 17, 21, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.hero-section {
+    position: relative;
+}
+.hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(11, 17, 21, 0.85) 0%,
+        rgba(11, 17, 21, 0.40) 50%,
+        rgba(11, 17, 21, 0.85) 100%
+    );
+    z-index: 1;
+}
+
+
+/* ── Page-load hero animations ── */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+.animate-fade-in-up-delay-1 {
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+}
+.animate-fade-in-up-delay-2 {
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+    opacity: 0;
+}
+.animate-fade-in-up-delay-3 {
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+    opacity: 0;
+}
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* ── Scroll-triggered reveal system ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1);
+}
+
+.reveal-left {
+    transform: translateX(-40px);
+}
+
+.reveal-right {
+    transform: translateX(40px);
+}
+
+.reveal-scale {
+    transform: scale(0.9);
+}
+
+.stagger-delay-1 { transition-delay: 0.1s; }
+.stagger-delay-2 { transition-delay: 0.2s; }
+.stagger-delay-3 { transition-delay: 0.3s; }
+.stagger-delay-4 { transition-delay: 0.4s; }
+.stagger-delay-5 { transition-delay: 0.5s; }
+
+.nav-link.active {
+    color: var(--color-gym-primary);
+}
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link-hero {
+    color: #ffffff;
+}
+
+.swiper-pagination-bullet {
+    background: #D1D5DB !important;
+    opacity: 1 !important;
+}
+.swiper-pagination-bullet-active {
+    background: var(--color-gym-primary) !important;
+    width: 28px !important;
+    border-radius: 4px !important;
+}
+
+/* ── Pricing Micro-interactions ── */
+
+.pricing-card {
+    transition: all 0.2s ease-out;
+}
+.pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+.pricing-card.popular:hover {
+    box-shadow: 0 20px 60px rgba(139, 197, 63, 0.15);
+}
+
+.pricing-btn {
+    transition: all 0.2s ease-out;
+}
+.pricing-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(139, 197, 63, 0.5);
+}
+
+.offer-card {
+    transition: all 0.2s ease-out;
+}
+.offer-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Features Micro-interactions ── */
+
+.feature-card {
+    transition: all 0.2s ease-out;
+}
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Trainers Micro-interactions ── */
+
+.trainer-card {
+    transition: all 0.2s ease-out;
+}
+.trainer-card:hover {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+.trainer-card:hover img {
+    transform: scale(1.12);
+}
+
+/* ── Steps Micro-interactions ── */
+
+.step-card {
+    transition: all 0.2s ease-out;
+}
+.step-card:hover {
+    transform: translateY(-4px);
+}
+.step-card:hover .step-icon {
+    background-color: rgba(139, 197, 63, 0.2);
+    transform: scale(1.05);
+}
+
+/* ── Schedule Micro-interactions ── */
+
+.schedule-table {
+    transition: all 0.2s ease-out;
+}
+.schedule-table:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.hours-card {
+    transition: all 0.2s ease-out;
+}
+.hours-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* ── CrossFit Table ── */
+
+.cf-table {
+    transition: all 0.2s ease-out;
+}
+.cf-table:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+.cf-table th {
+    font-weight: 700;
+    white-space: nowrap;
+}
+.cf-table td {
+    vertical-align: middle;
+}
+.cf-cell {
+    transition: all 0.2s ease-out;
+}
+.cf-cell:hover {
+    transform: scale(1.04);
+}
+
+/* ── Micro-interactions ── */
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.04) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.2s ease-in-out infinite;
+    border-radius: 0.75rem;
+}
+
+.glass-card {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+.glass-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+}
+
+.input-field {
+    transition: all 0.2s ease-out;
+}
+.input-field:focus {
+    border-color: var(--color-gym-primary) !important;
+    box-shadow: 0 0 0 4px rgba(139, 197, 63, 0.25);
+    transform: scale(1.01);
+}
+
+.payment-btn {
+    transition: all 0.2s ease-out;
+}
+.payment-btn:hover:not(.payment-selected) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+.payment-btn.payment-selected {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(139, 197, 63, 0.2);
+}
+
+.submit-btn {
+    transition: all 0.2s ease-out;
+}
+.submit-btn:active {
+    transform: scale(0.96);
+}
+
+@keyframes errorFadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.error-message {
+    animation: errorFadeIn 0.2s ease-out;
+}
+
+.price-value {
+    transition: all 0.25s ease-out;
+}
+
+@keyframes contentFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.content-fade-in {
+    animation: contentFadeIn 0.4s ease-out;
+}
+
+/* ── Tour Gallery ── */
+
+.tour-thumb {
+    transition: all 0.2s ease-out;
+}
+.tour-thumb:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+#tour-thumbnails {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+#tour-thumbnails::-webkit-scrollbar {
+    height: 4px;
+}
+#tour-thumbnails::-webkit-scrollbar-track {
+    background: transparent;
+}
+#tour-thumbnails::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.15);
+    border-radius: 4px;
+}
+
+/* ── FAQ Accordion ── */
+
+.faq-answer {
+    transition: max-height 0.3s ease-out;
+}
+.faq-btn.text-gym-primary .faq-icon {
+    color: var(--color-gym-primary);
+}
+
+/* ── LTR overrides ── */
+
+[dir="ltr"] .reveal-left {
+    transform: translateX(40px);
+}
+[dir="ltr"] .reveal-right {
+    transform: translateX(-40px);
+}
+[dir="ltr"] .cf-table-wrapper th:first-child,
+[dir="ltr"] .cf-table-wrapper td:first-child {
+    text-align: left;
+    position: sticky;
+    left: 0;
+    right: auto;
+}
+
+

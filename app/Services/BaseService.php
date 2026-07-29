@@ -1,0 +1,20 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services;
+
+use Illuminate\Support\Facades\Log;
+
+abstract class BaseService
+{
+    protected function logError(string $message, array $context = []): void
+    {
+        Log::error(class_basename(static::class) . ': ' . $message, $context);
+    }
+
+    protected function logInfo(string $message, array $context = []): void
+    {
+        Log::info(class_basename(static::class) . ': ' . $message, $context);
+    }
+}

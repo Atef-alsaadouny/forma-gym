@@ -1,0 +1,104 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-9000}:9000"
+    environment:
+      APP_KEY: ${APP_KEY}
+      APP_ENV: ${APP_ENV:-production}
+      APP_DEBUG: ${APP_DEBUG:-false}
+      APP_URL: ${APP_URL:-https://formagym.com}
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: ${DB_DATABASE:-forma_gym}
+      DB_USERNAME: ${DB_USERNAME:-forma_gym}
+      DB_PASSWORD: ${DB_PASSWORD:-secret}
+      SESSION_DRIVER: database
+      SESSION_ENCRYPT: true
+      SESSION_SECURE_COOKIE: true
+      QUEUE_CONNECTION: database
+      CACHE_STORE: file
+      LOG_LEVEL: warning
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - app-storage:/var/www/html/storage
+    healthcheck:
+      test: ["CMD-SHELL", "php-fpm -t > /dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-forma_gym}
+      MYSQL_USER: ${DB_USERNAME:-forma_gym}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root_secret}
+    volumes:
+      - mysqldata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "${NGINX_PORT:-80}:80"
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      app:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "nginx -t 2>/dev/null && exit 0 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  worker:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    command: php artisan queue:work --sleep=3 --tries=3 --max-time=3600
+    environment:
+      APP_KEY: ${APP_KEY}
+      APP_ENV: ${APP_ENV:-production}
+      APP_DEBUG: ${APP_DEBUG:-false}
+      APP_URL: ${APP_URL:-https://formagym.com}
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: ${DB_DATABASE:-forma_gym}
+      DB_USERNAME: ${DB_USERNAME:-forma_gym}
+      DB_PASSWORD: ${DB_PASSWORD:-secret}
+      SESSION_DRIVER: database
+      SESSION_ENCRYPT: true
+      QUEUE_CONNECTION: database
+      CACHE_STORE: file
+      LOG_LEVEL: warning
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - app-storage:/var/www/html/storage
+
+volumes:
+  mysqldata:
+  app-storage:
