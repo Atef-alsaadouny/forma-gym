@@ -48,7 +48,7 @@
     @stack('styles')
 
     {{-- Google Search Console --}}
-    <meta name="google-site-verification" content="T3A4zwShPwIQZi4CtGSOQaQh6jMkTTa51GjC537szmk" />
+    <meta name="google-site-verification" content="0-QMSFSzi465e38eI1zu8LUExkqJrEZRUeij436oydI" />
 
     {{-- SEO — JSON-LD --}}
     <script type="application/ld+json">
