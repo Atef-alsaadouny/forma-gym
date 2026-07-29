@@ -1,10 +1,14 @@
 #!/bin/bash
 
+set -e
+
 if [ ! -f .env ]; then
     cp .env.example .env
 fi
 
 php artisan key:generate --force --no-interaction
+
+export APP_KEY=$(grep ^APP_KEY= .env | head -1 | cut -d= -f2-)
 
 php artisan migrate --force --no-interaction
 
