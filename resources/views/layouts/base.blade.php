@@ -47,6 +47,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 
+    {{-- Google Search Console --}}
+    <meta name="google-site-verification" content="T3A4zwShPwIQZi4CtGSOQaQh6jMkTTa51GjC537szmk" />
+
     {{-- SEO — JSON-LD --}}
     <script type="application/ld+json">
     {
