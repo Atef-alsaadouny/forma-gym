@@ -4,6 +4,8 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     envVars:
+      - key: APP_NAME
+        value: Forma Gym
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
