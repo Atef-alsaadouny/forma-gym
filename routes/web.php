@@ -19,6 +19,14 @@ use App\Http\Controllers\Public\SubscriptionRegisterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
+Route::get('/robots.txt', function () {
+    $sitemap = url('/sitemap.xml');
+
+    return response("User-agent: *\nAllow: /\n\nSitemap: {$sitemap}\n", 200, [
+        'Content-Type' => 'text/plain',
+    ]);
+})->name('robots');
+
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 Route::get('/locale/{locale}', function (string $locale) {

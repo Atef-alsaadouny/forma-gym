@@ -35,12 +35,34 @@
     <link rel="alternate" hreflang="en" href="{{ $currentUrl . $separator . 'locale=en' }}">
     <link rel="alternate" hreflang="x-default" href="{{ $currentUrl }}">
 
+    {{-- Favicon --}}
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.svg') }}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
+
+    {{-- SEO — JSON-LD --}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HealthClub",
+        "name": "{{ config('app.name', 'Forma Gym') }}",
+        "url": "{{ url('/') }}",
+        "logo": "{{ asset('favicon.svg') }}",
+        "image": "{{ asset('images/gym-reg.jpg') }}",
+        "description": "{{ __('messages.site_description') }}",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "KW"
+        }
+    }
+    </script>
     @stack('jsonld')
 </head>
 <body class="h-full font-sans antialiased text-gym-text bg-gym-light overflow-x-hidden">
