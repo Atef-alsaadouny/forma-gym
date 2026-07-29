@@ -36,9 +36,12 @@
                             <div class="space-y-4">
                                 <div>
                                     <input type="text" id="booking_ref" name="booking_ref"
-                                        value="{{ old('booking_ref') }}" required dir="ltr"
-                                        class="input-field w-full rounded-xl border border-white/5 bg-white/5 px-3 py-2.5 text-left text-white placeholder-white/50 backdrop-blur-sm transition-all duration-200 focus:border-gym-primary focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-gym-primary/40"
-                                        placeholder="{{ __('messages.lookup_ref_placeholder') }}">
+                                        value="{{ old('booking_ref') }}" required
+                                        dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}"
+                                        class="input-field w-full rounded-xl border border-white/5 bg-white/5 px-3 py-2.5 {{ app()->getLocale() === 'ar' ? 'text-right' : 'text-left' }} text-white placeholder-white/50 backdrop-blur-sm transition-all duration-200 focus:border-gym-primary focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-gym-primary/40"
+                                        placeholder="{{ __('messages.lookup_ref_placeholder') }}"
+                                        oninvalid="this.setCustomValidity('{{ app()->getLocale() === 'ar' ? 'هذا الحقل مطلوب' : 'This field is required' }}')"
+                                        oninput="this.setCustomValidity('')">
                                     @error('booking_ref')
                                         <p class="error-message mt-1 text-sm text-red-400">{{ $message }}</p>
                                     @enderror
@@ -49,7 +52,8 @@
                                         value="{{ old('phone') }}" required dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}"
                                         class="input-field w-full rounded-xl border border-white/5 bg-white/5 px-3 py-2.5 {{ app()->getLocale() === 'ar' ? 'text-right' : 'text-left' }} text-white placeholder-white/50 backdrop-blur-sm transition-all duration-200 focus:border-gym-primary focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-gym-primary/40"
                                         placeholder="{{ __('messages.lookup_phone_placeholder') }}"
-                                        oninput="normalizePhone(this)">
+                                        oninvalid="this.setCustomValidity('{{ app()->getLocale() === 'ar' ? 'هذا الحقل مطلوب' : 'This field is required' }}')"
+                                        oninput="normalizePhone(this); this.setCustomValidity('')">
                                     @error('phone')
                                         <p class="error-message mt-1 text-sm text-red-400">{{ $message }}</p>
                                     @enderror

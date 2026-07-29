@@ -51,10 +51,10 @@ Route::middleware('cache.public')->group(function () {
 });
 
 Route::get('/subscription/register', [SubscriptionRegisterController::class, 'create'])->name('subscription.register');
-Route::post('/subscription/register', [SubscriptionRegisterController::class, 'store'])->name('subscription.register.store')->middleware('throttle:5,1');
+Route::post('/subscription/register', [SubscriptionRegisterController::class, 'store'])->name('subscription.register.store')->middleware('throttle:20,1');
 
 Route::get('/subscription/lookup', [SubscriptionLookupController::class, 'create'])->name('subscription.lookup');
-Route::post('/subscription/lookup', [SubscriptionLookupController::class, 'store'])->name('subscription.lookup.store')->middleware('throttle:10,1');
+Route::post('/subscription/lookup', [SubscriptionLookupController::class, 'store'])->name('subscription.lookup.store')->middleware('throttle:60,1');
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
