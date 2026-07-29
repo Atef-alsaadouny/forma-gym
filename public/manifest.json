@@ -1,0 +1,22 @@
+{
+    "name": "Forma Gym",
+    "short_name": "Forma Gym",
+    "description": "Forma Gym — premium fitness facility in Kuwait",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0B1115",
+    "theme_color": "#8BC53F",
+    "orientation": "portrait-primary",
+    "lang": "ar",
+    "dir": "rtl",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["fitness", "health", "sports"],
+    "prefer_related_applications": false
+}

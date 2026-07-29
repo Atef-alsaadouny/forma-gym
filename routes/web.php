@@ -19,6 +19,8 @@ use App\Http\Controllers\Public\SubscriptionRegisterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
+Route::view('/offline', 'public.offline')->name('offline');
+
 Route::get('/robots.txt', function () {
     $sitemap = url('/sitemap.xml');
 

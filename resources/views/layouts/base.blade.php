@@ -35,6 +35,14 @@
     <link rel="alternate" hreflang="en" href="{{ $currentUrl . $separator . 'locale=en' }}">
     <link rel="alternate" hreflang="x-default" href="{{ $currentUrl }}">
 
+    {{-- PWA --}}
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Forma Gym">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0B1115">
+
     {{-- Favicon --}}
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
@@ -72,5 +80,15 @@
 <body class="h-full font-sans antialiased text-gym-text bg-gym-light overflow-x-hidden">
     @yield('body')
     @stack('scripts')
+
+    @if(app()->environment('production'))
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sw.js');
+                });
+            }
+        </script>
+    @endif
 </body>
 </html>
