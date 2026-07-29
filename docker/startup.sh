@@ -2,17 +2,15 @@
 
 set -e
 
-if [ ! -f .env ]; then
-    cp .env.example .env
+if [ -z "${APP_KEY:-}" ]; then
+    if [ ! -f .env ]; then
+        cp .env.example .env
+    fi
+    php artisan key:generate --force --no-interaction
+    APP_KEY=$(grep ^APP_KEY= .env | head -1 | cut -d= -f2-)
+    export APP_KEY
+    echo "env[APP_KEY] = ${APP_KEY}" >> /usr/local/etc/php-fpm.d/www.conf
 fi
-
-php artisan key:generate --force --no-interaction
-
-APP_KEY=$(grep ^APP_KEY= .env | head -1 | cut -d= -f2-)
-
-export APP_KEY
-
-echo "env[APP_KEY] = ${APP_KEY}" >> /usr/local/etc/php-fpm.d/www.conf
 
 php artisan migrate --force --no-interaction
 
