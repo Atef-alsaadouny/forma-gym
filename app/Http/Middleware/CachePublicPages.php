@@ -15,7 +15,7 @@ class CachePublicPages
         $response = $next($request);
 
         if ($response->isSuccessful() && $request->isMethod('GET')) {
-            $response->headers->set('Cache-Control', 'private, no-cache, must-revalidate');
+            $response->headers->set('Cache-Control', 'public, s-maxage=3600, must-revalidate');
             $response->headers->set('Vary', 'Cookie, Accept-Language');
         }
 

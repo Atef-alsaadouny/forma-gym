@@ -21,14 +21,6 @@ use Illuminate\Support\Facades\Session;
 
 Route::view('/offline', 'public.offline')->name('offline');
 
-Route::get('/robots.txt', function () {
-    $sitemap = url('/sitemap.xml');
-
-    return response("User-agent: *\nAllow: /\n\nSitemap: {$sitemap}\n", 200, [
-        'Content-Type' => 'text/plain',
-    ]);
-})->name('robots');
-
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 Route::get('/locale/{locale}', function (string $locale) {

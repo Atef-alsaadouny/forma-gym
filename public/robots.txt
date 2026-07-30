@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://forma-gym.onrender.com/sitemap.xml
